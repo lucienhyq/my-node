@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="ck">
+			
+		</div>
+		
+		
+		
+		<script>
+			$(function(){
+				$.ajax({
+					type:"post",
+					url:"/users/session",
+					async:true
+	
+				}).done(function(res){
+					console.log(res);
+					
+					$("#ck").html(JSON.stringify(res))
+				})
+			})
+			
+		</script>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div class="v1">
+				请输入事项：<input type="text" v-model="inpone"  /><button @click="push">提交</button>
+			</div>
+			<div v-for="(item,index) in dada" :key='index'>
+				<em>待办事项: </em><span>{{item}}</span><button @click="del(index)">彻底删除</button>
+			</div>
+			<div v-for="(item,index) in alldata" :key='index'>
+				<em>待办事项: </em><span>{{item}}</span><button @click="del(index)">彻底删除</button>
+			</div>
+			
+		</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.9/dist/vue.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script type="text/javascript">
+		var vm = new Vue({
+			el:'#app',
+			data(){
+				return{
+					dada:[],
+					inpone:'',
+					alldata:[]
+				}
+			},
+			methods:{
+				push(){
+					this.dada.push(this.inpone);
+					console.log(this.dada);
+				},
+				del(index){
+					console.log(this.dada[index]);
+					this.dada.splice(index,1)
+				},
+				getdata(){
+					$.ajax({
+						type: "post",
+						url: "/test/chakan",
+						async: true,
+						dataType: "json",
+						data: {
+							action: 'addd'
+						}
+					}).done(function(res) {
+						console.log(res.data)
+						this.alldata = res.data
+					})
+				},
+				mounted() {
+					this.getdata()
+				},
+			}
+			
+		})
+	</script>
+	</body>
+</html>

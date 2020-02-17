@@ -1,0 +1,115 @@
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<tille>个人信息</title>
+			<style type="text/css">
+				h1 {
+					font-size: 30px;
+					color: #930;
+					text-align: center;
+				}
+			</style>
+	</head>
+
+	<body>
+
+		<h1>个人信息</h1>
+		<!--onsubmit="return false"-->
+		<form method="post" action="/users/userInfo">
+
+			<input type="hidden" name="action" id="action" value="editUser" />
+			<p>
+				<lable for="username"> 用户名：</label>
+					<input type="text" disabled name="userName" id="username"></p>
+			<p>
+				<lable for="phone"> 手机号：</label>
+					<input type="text" name="phone" id="phone"></p>
+
+			<p>
+				级别：
+				<select name="powerCode" id="jibie">
+					<option value="1">会员</option>
+					<option value="2">非会员</option>
+				</select>
+			</p>
+			<p>
+				<lable for="email"> 邮箱：</label>
+					<input type="text" name="email" id="email"></p>
+			<p>
+				<lable for="truename"> 真实姓名：</label>
+					<input type="text" name="trueName" id="truename"></p>
+			<p>
+				<p>
+					<lable for="truename" id="createTime"> 创建时间：</label>
+
+						<p>
+							<input type="submit" id="edit" value="修改">
+							<input id="zy" type="reset" value="回主页"></p>
+		</form>
+
+	</body>
+	<script src="javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		//			获取地址栏search
+		function GetQueryString(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var r = window.location.search.substr(1).match(reg);
+			if(r != null) return(r[2]);
+			return null;
+		}
+		var userId = decodeURI(GetQueryString("userId"));
+		console.log(userId);
+
+		function loadUser() {
+			$.ajax({
+				type: "post",
+				url: "/users/userInfo",
+				dataType: "json",
+				data: {
+					userId: userId,
+					action: "getUser"
+				}
+			}).done(function(res) {
+				console.log(res);
+				console.log(res[0].creatTime);
+				$("#username").val(res[0].userName);
+				$("#phone").val(res[0].phone);
+				$("#email").val(res[0].email);
+				$("#truename").val(res[0].trueName);
+				$("#createTime").html("创建时间:" + res[0].creatTime);
+				$("#jibie").val(res[0].powerCode);
+			})
+		}
+		loadUser();
+		$("#edit").click(function() {
+			$.ajax({
+				type: "post",
+				url: "/users/userInfo",
+				dataType: "json",
+				data: {
+					userName: $("#username").val(),
+					phone: $("#phone").val(),
+					email: $("#email").val(),
+					truename: $("#truename").val(),
+					powerCode: $("#jibie").val(),
+					createTime: $("#createTime").html(),
+					action: "editUser"
+				}
+			}).done(function(res) {
+				console.log(res);
+				if(res.success) {
+					alert("修改成功");
+					loadUser();
+				}
+				if(res.err) {
+					alert("res.err")
+				}
+			})
+		})
+//		$("#zy").click(function(){
+//			location.href="index.html"+location.search;
+//		})
+	</script>
+
+</html>
