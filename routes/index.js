@@ -10,7 +10,7 @@ var mongo = require("./shujukufangfafengzhuang.js");
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
-		res.redirect("testvue.html");
+		res.redirect("/index1.html");
 		var setImg ={}
 
 		var c = new Crawler({
@@ -69,18 +69,7 @@ router.get('/', function(req, res, next) {
 										}else{
 											console.log('已存在数据');
 										}
-										// if(data.lenth !=0){
-										// 	console.log('已存在数据');
-										// 	// mongo("add","img",list,function(result){
-										// 	// 	if(result.length!=0){
-										// 	// 		console.log('{"success":"插入成功"}')
-										// 	// 	}else{
-										// 	// 		console.log('{"success":"插入失败"}')
-										// 	// 	}
-										// 	// })
-										// }else{
-										// 	console.log('无数据')
-										// }
+										
 									})
 									
 								})
