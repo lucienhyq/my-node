@@ -4,7 +4,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,viewport-fit=cover" />
+		<meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,viewport-fit=cover"/>
 		<title>个人demo</title>
 		<!-- <script src="javascripts/jquery.js" type="text/javascript" charset="utf-8"></script> -->
 		<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
@@ -16,63 +17,14 @@
 		<script src="javascripts/tools.js" type="text/javascript" charset="utf-8"></script>
 		<script src="javascripts/zy.js" type="text/javascript" charset="utf-8"></script>
 		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.9/dist/vue.js" type="text/javascript" charset="utf-8"></script>
-
+		<link rel="stylesheet" href="./stylesheets/home.css">
 		<style type="text/css">
 			body{
+				min-height: 200vh;
 				background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1577182903571&di=6d4e8a5e205371e13cbe89c217c86a5d&imgtype=0&src=http%3A%2F%2Fxmtxy.xjtu.edu.cn%2Fzp%2F6%2Fbackground3.jpg);
-				background-size: cover;
+				background-size: con;
 			}
-			#xg {
-				color: bisque;
-				cursor: pointer;
-			}
-
-			#passwordMask {
-				display: none;
-			}
-
-			.bigbox {
-				display: flex;
-				justify-content: space-around;
-				align-items: center;
-			}
-
-			.swiper_box {
-				width: 90%;
-				height: 22rem;
-				background-color: rgba(242, 242, 242, 1);
-				margin: 0 auto;
-				border-radius: 0.38rem;
-				background: url(images/1111111.jpg) no-repeat;
-				background-size:contain;	
-			}
-			.nbalist{
-				margin: 0 auto;
-				height: 20rem;
-				display: flex;
-				justify-content:flex-start;
-				align-items: center;
-			}
-			.nbalist .nbabox{
-				width: 10rem;
-				height: 10rem;
-				display: flex;
-				flex-direction: column;
-			}
-			.nbalist .nbabox img{
-				width: 100%;
-				height: 6rem;
-			}
-			.nbalist .nbabox p{
-				text-align: left;
-				font-size: 16px;
-				color:black;
-			}
-			.nbalist .nbabox span{
-				text-align: left;
-				font-size: 16px;
-				color:black;
-			}
+			
 		</style>
 
 	</head>
@@ -117,11 +69,11 @@
 			</div> -->
 			<div class="swiper_box">
 			</div>
-			<div class="nbalist"@click='tonbalist'>
-				<div class="nbabox" v-for="(item,index) in alldata" :key='index'>
-					<img :src="alldata.src" alt="">
-					<p>{{alldata.title}}</p>
-					<span>{{alldata.time}}</span>
+			<div class="nbalist" >
+				<div class="nbabox" v-for="(item,index) in alldata" :key='index' v-if="alldata" @click='tap(item,index)'>
+					<img :src="imghost + item.src" alt="">
+					<p>{{item.title}}</p>
+					<span>{{item.time}}</span>
 				</div>
 			</div>
 	
@@ -168,14 +120,24 @@
 				el:'#app',
 				data(){
 					return{
-						alldata:''
+						alldata:'',
+						imghost:'https://www.lanqiuba.com/',
+						src_link:''
 					}
 				},
 				methods:{
+					tap(item,index){
+						console.log(item,index)
+						console.log(item.link)
+						this.src_link = this.imghost + item.link;
+						window.location.href = this.src_link
+						console.log(this.src_link)
+					},
 					tonbalist(){
 						console.log('11111')
 					},
 					getdata(){
+						var that = this
 						$.ajax({
 							type: "post",
 							url: "/test/chakan",
@@ -185,9 +147,10 @@
 								action: 'addd'
 							}
 						}).done(function(res) {
-							console.log(res.data)
-							this.alldata = res.data
+							console.log(that)
+							that.alldata = res.data;
 						})
+						console.log(that.alldata)
 					}
 				},
 				mounted() {
