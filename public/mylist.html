@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,viewport-fit=cover"/>
+  <title>个人简历</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.9/dist/vue.js" type="text/javascript" charset="utf-8"></script>
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.5/lib/index.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vant@2.5/lib/vant.min.js"></script>
+  <script src="javascripts/list.js"></script>
+  <style>
+    body{
+      background: #f2f2f7;
+    }
+    .header_box{
+      height: 3rem;
+      width: 100%;
+      background: #ffffff;
+      text-align: center;
+      line-height: 3rem;
+    }
+    .card{
+      width: 21.875rem;
+      height: 12.5rem;
+      background-color: aquamarine;
+      margin: 1.03rem auto;
+      border-radius: 0.938rem;
+    }
+    .information{
+      margin: 0 0.781rem;
+      background: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="appMain">
+      <div class="header_box">个人简历</div>
+      <div class="card">
+        
+      </div>
+      <div class="tab_box">
+        <van-tabs v-model="active">
+          <van-tab title="个人信息">
+            <div class="information">萨达是大学在职场中冯绍峰胜多负少大萨达阿斯达下次再下水道咁热vacvdscFQED DASASDA水电费第三方水电费阿斯达速度</div>
+          </van-tab>
+          <van-tab title="自我介绍">内容 2</van-tab>
+        </van-tabs>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          active: 0
+        }
+      },
+      mounted() {
+        console.log(vant)
+        this.getPhoneEnv();
+        this.setPcStyle();
+      },
+      methods: {
+        //判断微信下ios和安卓 ios为1 安卓为2 其他3
+        getPhoneEnv() {
+          var u = navigator.userAgent,
+            app = navigator.appVersion;
+          var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //g
+          var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+          console.log(isAndroid)
+          if (isAndroid) {
+            return "2";
+          } else if (isIOS) {
+            return "1";
+          } else {
+            return "3";
+          }
+        },
+        setPcStyle() {
+          //pc端浏览器网页或者pc端微信网页 样式
+          if (this.getPhoneEnv() == 3) {
+            document.getElementById("appMain").style.width = "375px";
+            document.getElementById("appMain").style.margin = "0 auto";
+          }
+        },
+      },
+    });
+
+  </script>
+</body>
+</html>

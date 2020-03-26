@@ -19,7 +19,7 @@
   background-color: rgba(242, 242, 242, 1);
   margin: 0 auto;
   border-radius: 0.38rem;
-  background: url("../images/1111111.jpg") no-repeat;
+  /* background: url("../images/1111111.jpg") no-repeat; */
   background-size:contain;	
 }
 .nbalist{
@@ -30,12 +30,12 @@
   flex-wrap: wrap;
 }
 .nbalist .nbabox{
-  width: 28%;
+  width: 10rem;
   height: 13rem;
   display: flex;
   flex-direction: column;
-  color: #f3f3f3;
-  margin: 0 1rem;
+  color: #999999;
+  margin: 0 0.1rem;
 }
 .nbalist .nbabox img{
   width: 100%;
@@ -44,7 +44,7 @@
 .nbalist .nbabox p{
   text-align: left;
   font-size: 12px;
-  color: #f3f3f3;
+  color: #999999;
   margin: 0;text-overflow: -o-ellipsis-lastline;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -55,5 +55,17 @@
 .nbalist .nbabox span{
   text-align: left;
   font-size: 12px;
-  color:#f3f3f3;
+  color: #999999;
+}
+.fixed{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000000;
 }
