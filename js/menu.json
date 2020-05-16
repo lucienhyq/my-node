@@ -10,8 +10,8 @@
         "sub_button":[
         {	
             "type":"view",
-            "name":"搜索",
-            "url":"https://china.nba.com/"
+            "name":"个人简历",
+            "url":"http://www.lucienluck.cn/mylist.html"
          },
          {
             "type":"click",

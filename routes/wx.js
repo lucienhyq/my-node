@@ -92,9 +92,10 @@ router.get('/wxind', function(req, res, next) {
 router.post('/wxind', function (req, res, next) {
   getAccessToken().then(function(data){
     var url = util.format(config.diyApi.createMenu, config.prefix, data);
+      console.log(url)
         requestPost(url,JSON.stringify(menu)).then(function(data){
             //将结果打印
-            // console.log(data);
+            console.log(data);
         });
   })
   var buffer = [],
