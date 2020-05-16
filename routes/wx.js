@@ -49,6 +49,7 @@ let getAccessToken = function(){
                 accessTokenJson.access_token = result.access_token;
                 accessTokenJson.expires_time = new Date().getTime() + (parseInt(result.expires_in) - 200) * 1000;
                 console.log('更新本地存储的' + result)
+                console.log(JSON.stringify(accessTokenJson))
                 //更新本地存储的
                 fs.writeFile('/tenxunyun/web/node/js/wcAccess_token.json',JSON.stringify(accessTokenJson),function(err){
                   if(err){
