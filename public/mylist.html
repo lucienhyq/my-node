@@ -68,7 +68,7 @@
       data() {
         return {
           active: 0,
-          datas:[]
+          datas: []
         }
       },
       mounted() {
@@ -77,9 +77,43 @@
         this.getPhoneEnv();
         this.setPcStyle();
         this.getdata();
-        
+
+      },
+      created() {
+        this.share();
       },
       methods: {
+        share() {
+          wx.ready(function () {
+            wx.showOptionMenu();
+            wx.onMenuShareTimeline({
+              title: '我的标题', // 分享标题
+              // link: _link, // 分享链接
+              // imgUrl: _imgUrl, // 分享图标
+              success: function () {
+                Toast("分享成功");
+              },
+              cancel: function () {
+                Toast("取消分享");
+              }
+            });
+
+            wx.onMenuShareAppMessage({
+              title: '我的标题', // 分享标题
+              desc: '这是我的分享描述', // 分享描述
+              link: _link, // 分享链接
+              imgUrl: _imgUrl, // 分享图标
+              type: "link", // 分享类型,music、video或link，不填默认为link
+              dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
+              success: function () {
+                Toast("分享成功");
+              },
+              cancel: function () {
+                Toast("取消分享");
+              }
+            });
+          })
+        },
         getdata() {
           var that = this
           $.ajax({
@@ -104,8 +138,8 @@
           })
           console.log(that.alldata)
         },
-        setinfo(){
-          
+        setinfo() {
+
         },
         //判断微信下ios和安卓 ios为1 安卓为2 其他3
         getPhoneEnv() {
