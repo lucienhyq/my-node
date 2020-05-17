@@ -11,6 +11,7 @@ var orderRouter = require('./routes/order');
 var viadanteRouter = require('./routes/viadante');
 var test = require('./routes/test');
 var wx = require('./routes/wx');
+// var wxJsSdkConfig = require('./routes/wx')
 //引入session模块
 
 var session = require("express-session");

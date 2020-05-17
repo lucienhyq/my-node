@@ -12,6 +12,8 @@ var config = require("../js/isWcConfig");
 var accessTokenJson = require("../js/wcAccess_token");
 var util = require("util");
 var menu = require("../js/menu");
+var crawler = require('../js/crawler');
+
 /**
  * [开启跨域便于接口访问]
  */
@@ -69,7 +71,27 @@ let getAccessToken = function(){
   })
   
 };
-
+router.get('/wxJsSdkConfig',function(req,res,next){  
+  console.log('是token',accessTokenJson.access_token)
+  var url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token="+accessTokenJson.access_token;
+  var params ={}
+  requestGet(url).then(function(data){
+    var result = JSON.parse(data); 
+    console.log(result.ticket)
+    // ticket=result.ticket
+    crawler(params,res)
+    // console.log(crawler.getSign())
+  })
+  // let datas = {
+  //   debug:true,
+  //   appID:'wxd559198a91642896',
+  //   timestamp:'',
+  //   nonceStr:'',
+  //   signature:'',
+  //   jsApiList:[]
+  // }
+  // res.send(datas)
+})
 router.get('/wxind', function(req, res, next) {
   var that = this;
   // console.log(req)
@@ -169,5 +191,6 @@ let requestGet = function(url) {
       })
   })
 };
+
 
 module.exports = router;

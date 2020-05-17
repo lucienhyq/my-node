@@ -1,46 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,viewport-fit=cover"/>
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,viewport-fit=cover" />
   <title>个人简历</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.9/dist/vue.js" type="text/javascript" charset="utf-8"></script>
-  
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.5/lib/index.css">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vant@2.5/lib/vant.min.js"></script>
   <script src="javascripts/list.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
   <style>
-    body{
+    body {
       background: #f2f2f7;
     }
-    .header_box{
+
+    .header_box {
       height: 3rem;
       width: 100%;
       background: #ffffff;
       text-align: center;
       line-height: 3rem;
     }
-    .card{
+
+    .card {
       width: 21.875rem;
       height: 12.5rem;
       background-color: aquamarine;
       margin: 1.03rem auto;
       border-radius: 0.938rem;
     }
-    .information{
+
+    .information {
       margin: 0 0.781rem;
       background: #ffffff;
     }
   </style>
 </head>
+
 <body>
   <div id="app">
     <div id="appMain">
       <div class="header_box">个人简历</div>
       <div class="card">
-        
+
       </div>
       <div class="tab_box">
         <van-tabs v-model="active">
@@ -52,21 +59,54 @@
       </div>
     </div>
   </div>
-  
+
   <script>
+    // import wx from 'weixin-jsapi'
+    // var wx = require('../js/jweixin-1.6.0')
     new Vue({
       el: '#app',
       data() {
         return {
-          active: 0
+          active: 0,
+          datas:[]
         }
       },
       mounted() {
-        console.log(vant)
+        console.log(wx)
+        // console.log(vant)
         this.getPhoneEnv();
         this.setPcStyle();
+        this.getdata();
+        
       },
       methods: {
+        getdata() {
+          var that = this
+          $.ajax({
+            type: "get",
+            url: "/wx/wxJsSdkConfig",
+            async: true,
+            dataType: "json",
+          }).done(function (res) {
+            console.log(res)
+            that.datas = res;
+            // that.setinfo()
+            // console.log(that)
+            // that.alldata = res.data;
+            wx.config({
+              debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+              appId: that.datas.appId, // 必填，公众号的唯一标识
+              timestamp: that.datas.timestamp, // 必填，生成签名的时间戳
+              nonceStr: that.datas.nonceStr, // 必填，生成签名的随机串
+              signature: that.datas.signature,// 必填，签名
+              jsApiList: ['updateAppMessageShareData'] // 必填，需要使用的JS接口列表
+            });
+          })
+          console.log(that.alldata)
+        },
+        setinfo(){
+          
+        },
         //判断微信下ios和安卓 ios为1 安卓为2 其他3
         getPhoneEnv() {
           var u = navigator.userAgent,
@@ -94,4 +134,5 @@
 
   </script>
 </body>
+
 </html>
