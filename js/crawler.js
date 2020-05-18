@@ -71,7 +71,7 @@ module.exports = getSign = (params, res) => {
     jsapi_ticket: params.ticket,
     nonceStr: createNonceStr(),
     timestamp: createTimestamp(),
-    url: "http://www.lucienluck.cn/mylist.html"
+    url: params.url
   };
   console.log(params, ret);
   var string = raw(ret)

@@ -72,13 +72,16 @@ let getAccessToken = function(){
   
 };
 router.get('/wxJsSdkConfig',function(req,res,next){  
-  console.log('是token',accessTokenJson.access_token)
+  // console.log("这是前端传过来的url",req.query.url)
+  // console.log('是token',accessTokenJson.access_token)
   var url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token="+accessTokenJson.access_token;
-  var params ={}
+  var params ={};
+  params.url = req.query.url;
   requestGet(url).then(function(data){
     var result = JSON.parse(data); 
-    console.log(result.ticket)
-    // ticket=result.ticket
+    // console.log("这是ticket",result.ticket)
+    params.ticket=result.ticket
+    console.log(params)
     crawler(params,res)
     // console.log(crawler.getSign())
   })
