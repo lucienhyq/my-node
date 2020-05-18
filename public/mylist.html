@@ -102,7 +102,7 @@
               timestamp: that.datas.timestamp, // 必填，生成签名的时间戳
               nonceStr: that.datas.nonceStr, // 必填，生成签名的随机串
               signature: that.datas.signature,// 必填，签名
-              jsApiList: ['updateAppMessageShareData'] // 必填，需要使用的JS接口列表
+              jsApiList: ['updateAppMessageShareData','updateTimelineShareData','onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表
             });
             wx.ready(function () {
               wx.showOptionMenu();
