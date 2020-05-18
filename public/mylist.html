@@ -102,19 +102,16 @@
               timestamp: that.datas.timestamp, // 必填，生成签名的时间戳
               nonceStr: that.datas.nonceStr, // 必填，生成签名的随机串
               signature: that.datas.signature,// 必填，签名
-              jsApiList: ['updateAppMessageShareData','updateTimelineShareData','onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表
+              jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表
             });
             wx.ready(function () {
-              wx.showOptionMenu();
-              wx.onMenuShareTimeline({
-                title: '我的标题', // 分享标题
-                link: document.location.href, // 分享链接
+              wx.updateAppMessageShareData({
+                title: '我的测试标题', // 分享标题
+                desc: '我的测试标题', // 分享描述
+                link: that.datas.url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                 imgUrl: '', // 分享图标
                 success: function () {
-                  Toast("分享成功");
-                },
-                cancel: function () {
-                  Toast("取消分享");
+                  // 设置成功
                 }
               });
             })

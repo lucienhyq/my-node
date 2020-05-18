@@ -79,21 +79,11 @@ router.get('/wxJsSdkConfig',function(req,res,next){
   params.url = req.query.url;
   requestGet(url).then(function(data){
     var result = JSON.parse(data); 
-    // console.log("这是ticket",result.ticket)
     params.ticket=result.ticket
     console.log(params)
     crawler(params,res)
     // console.log(crawler.getSign())
   })
-  // let datas = {
-  //   debug:true,
-  //   appID:'wxd559198a91642896',
-  //   timestamp:'',
-  //   nonceStr:'',
-  //   signature:'',
-  //   jsApiList:[]
-  // }
-  // res.send(datas)
 })
 router.get('/wxind', function(req, res, next) {
   var that = this;
