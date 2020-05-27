@@ -119,12 +119,13 @@
 
         },
         getdata() {
-          var that = this
+          var that = this;
+          var urls = location.href.split('#')[0];
           $.ajax({
             type: "get",
             url: "/wx/wxJsSdkConfig",
             data: {
-              url: window.location.href.split('#')[0]
+              url: urls
             },
             async: true,
             dataType: "json",
