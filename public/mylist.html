@@ -89,7 +89,7 @@
             type: "get",
             url: "/wx/wxJsSdkConfig",
             data: {
-              url: window.location.href
+              url: location.href.split('#')[0]
             },
             async: true,
             dataType: "json",
