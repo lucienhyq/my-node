@@ -1,6 +1,6 @@
 {
   "appID": "wxab206bb4cbe7857a",
-  "appScrect": "01b3086946c60fcb676ab0ef9a9064fe",
+  "appScrect": "d73d31b97e032d50388dc510a01f439f",
   "token": "quan",
   "prefix": "https://api.weixin.qq.com/",
   "weather":"https://www.sojson.com/open/api/weather/json.shtml?city=%s",
