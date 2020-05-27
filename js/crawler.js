@@ -73,10 +73,11 @@ module.exports = getSign = (params, res) => {
     timestamp: createTimestamp(),
     url: params.url
   };
-  console.log(params, ret);
+  // console.log(params, ret);
   var string = raw(ret)
   ret.signature = sha1(string)
   ret.appId = config.appID;
-  console.log('ret', ret)
+  // console.log('ret', ret)
+  console.log('jsapi_ticket',ret.jsapi_ticket)
   res.send(ret);
 }

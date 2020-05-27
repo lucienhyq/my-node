@@ -44,6 +44,7 @@ let getAccessToken = function(){
     var currentTime = new Date().getTime();
     //格式化请求地址，把刚才的%s按顺序替换
     var url = util.format(config.diyApi.getAccessToken, config.prefix, config.appID, config.appScrect);
+    console.log(accessTokenJson.access_token === "" || accessTokenJson.expires_time < currentTime)
     if(accessTokenJson.access_token === "" || accessTokenJson.expires_time < currentTime){
         requestGet(url).then(function(data){
             var result = JSON.parse(data); 
@@ -80,8 +81,12 @@ router.get('/wxJsSdkConfig',function(req,res,next){
   requestGet(url).then(function(data){
     var result = JSON.parse(data); 
     params.ticket=result.ticket
-    console.log(params)
-    crawler(params,res)
+    console.log(data)
+    if(result){
+      crawler(params,res)
+    }
+    // console.log('ticket'.params.ticket)
+    // crawler(params,res)
     // console.log(crawler.getSign())
   })
 })
@@ -121,6 +126,7 @@ router.post('/wxind', function (req, res, next) {
     });
     req.on('end',function(){
         var msgXml = Buffer.concat(buffer).toString('utf-8');
+        console.log(msgXml)
         parseString(msgXml,{explicitArray : false},function(err,result){
             // 如果有错误直接抛出
             if(err) throw err;
