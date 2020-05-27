@@ -103,7 +103,7 @@
               nonceStr: that.datas.nonceStr, // 必填，生成签名的随机串
               signature: that.datas.signature,// 必填，签名
               jsApiList: [
-                updateAppMessageShareData
+                "updateAppMessageShareData"
               ]
             });
             wx.ready(function () {
@@ -112,12 +112,15 @@
                 desc: '我的测试标题', // 分享描述
                 link: that.datas.url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                 imgUrl: '', // 分享图标
-                success: function (err) {
+                success: function (res) {
                   // 设置成功
-                  console.log('设置成功')
+                  console.log('设置成功',res)
                 }
               });
             })
+            wx.error(function (res) {
+              console.log(res)
+            });
           })
 
         },
