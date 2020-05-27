@@ -102,7 +102,29 @@
               timestamp: that.datas.timestamp, // 必填，生成签名的时间戳
               nonceStr: that.datas.nonceStr, // 必填，生成签名的随机串
               signature: that.datas.signature,// 必填，签名
-              jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表
+              jsApiList: ["checkJsApi",
+                "onMenuShareTimeline",
+                "onMenuShareAppMessage",
+                "onMenuShareQQ",
+                "onMenuShareWeibo",
+                "onMenuShareQZone",
+                "hideMenuItems",
+                "showMenuItems",
+                "hideAllNonBaseMenuItem",
+                "showAllNonBaseMenuItem",
+                "translateVoice",
+                "startRecord",
+                "stopRecord",
+                "onVoiceRecordEnd",
+                "playVoice",
+                "onVoicePlayEnd",
+                "pauseVoice",
+                "stopVoice",
+                "uploadVoice",
+                "downloadVoice",
+                "chooseImage",
+                "previewImage",
+                "uploadImage", "downloadImage", "getNetworkType", "openLocation", "getLocation", "hideOptionMenu", "showOptionMenu", "closeWindow", "scanQRCode", "chooseWXPay", "openProductSpecificView", "addCard", "chooseCard", "openCard"] // 必填，需要使用的JS接口列表
             });
             wx.ready(function () {
               wx.updateAppMessageShareData({
