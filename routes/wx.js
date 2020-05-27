@@ -44,17 +44,20 @@ let getAccessToken = function () {
     var currentTime = new Date().getTime();
     //格式化请求地址，把刚才的%s按顺序替换
     var url = util.format(config.diyApi.getAccessToken, config.prefix, config.appID, config.appScrect);
-    console.log(accessTokenJson.access_token === "" || accessTokenJson.expires_time < currentTime)
-    if (accessTokenJson.access_token === "" || accessTokenJson.expires_time < currentTime) {
+    console.log(accessTokenJson.access_token === "" || accessTokenJson.expires_time < currentTime);
+    console.log(accessTokenJson.expires_time,currentTime)
+    if ( accessTokenJson.expires_time < currentTime) {
+      console.log('111111111111')
       requestGet(url).then(function (data) {
         var result = JSON.parse(data);
+        console.log('result:',result)
         if (data.indexOf("errcode") < 0) {
           accessTokenJson.access_token = result.access_token;
           accessTokenJson.expires_time = new Date().getTime() + (parseInt(result.expires_in) - 200) * 1000;
           console.log('更新本地存储的' + result)
           console.log(JSON.stringify(accessTokenJson))
           //更新本地存储的
-          fs.writeFile('/tenxunyun/web/node/js/wcAccess_token.json', JSON.stringify(accessTokenJson), function (err) {
+          fs.writeFile('js/wcAccess_token.json', JSON.stringify(accessTokenJson), function (err) {
             if (err) {
               console.log(err)
             }
@@ -76,6 +79,7 @@ router.get('/wxJsSdkConfig', function (req, res, next) {
   // console.log("这是前端传过来的url",req.query.url)
   // console.log('是token',accessTokenJson.access_token)
   var currentTime = new Date().getTime();
+  console.log(accessTokenJson.access_token)
   if (accessTokenJson.access_token === "" || accessTokenJson.expires_time < currentTime) {
     getAccessToken().then(function (data) {
       var url = util.format(config.diyApi.createMenu, config.prefix, data);
